@@ -15,7 +15,7 @@ class Solution {
         int[] result = {0, 0};
         // 记录元素出现的下标
         Map<Integer, List<Integer>> map = new HashMap<>(nums.length);
-        // 将nums中的数值映射到map中，数值为key，下标为value，记录可能重复出出出现的元素
+        // 将nums中的数值映射到map中，数值为key，下标为value，记录可能重复出现的元素
         for (int i=0; i<nums.length; i++){
             if(map.containsKey(nums[i])){
                 map.get(nums[i]).add(i);

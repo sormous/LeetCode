@@ -18,6 +18,7 @@ class Solution {
         // 哈希表记录字符串中每一个字符和它的位置
         Map<Character, Integer> map = new HashMap<>(s.length());
         
+        //遍历字符串，遇到与子串中字符重复的字符则将子串起始位置+1
         for (int i=0; i<s.length(); i++){
             char ch = s.charAt(i);
             if(map.containsKey(ch) && map.get(ch) >= start){
