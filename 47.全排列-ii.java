@@ -34,6 +34,7 @@ class Solution {
                 if(canSwap(nums, cur, i)){
                     swap(nums, cur, i);
                     dfs(nums, cur+1);
+                    //交换回去
                     swap(nums, cur, i);
                 }
             }
