@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ class Solution {
             map.put(nums[i], i);
         }
         //然后对数组进行排序
+        //使用Collections.reverseOrder可以降序排列，当需要将int[]数组装换成Integer[]数组
         Arrays.sort(nums);
         //j记录分数最高的位置
         int j = nums.length-1;
