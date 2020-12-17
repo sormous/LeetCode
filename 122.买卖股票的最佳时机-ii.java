@@ -18,24 +18,37 @@ class Solution {
      * @return max
      */
     public int maxProfit(int[] prices) {
-        int max = 0;
-        if(prices.length <= 1) return max;
+        //method 1:
+        // int max = 0;
+        // if(prices.length <= 1) return max;
 
-        int buy = prices[0], sell = prices[1];
-        for(int i=1; i<prices.length; i++){
-            if(buy>sell){
-                buy = sell;
-            }
-            if(prices[i] >= sell){
-                sell = prices[i];
-                //在最后一个元素时，不需要跳出，而是进行计算得出最大利润
-                if(i!=prices.length-1) continue;
-            }
-            max += (sell-buy);
-            buy = prices[i];
-            sell = prices[i];
+        // int buy = prices[0], sell = prices[1];
+        // for(int i=1; i<prices.length; i++){
+        //     if(buy>sell){
+        //         buy = sell;
+        //     }
+        //     if(prices[i] >= sell){
+        //         sell = prices[i];
+        //         //在最后一个元素时，不需要跳出，而是进行计算得出最大利润
+        //         if(i!=prices.length-1) continue;
+        //     }
+        //     max += (sell-buy);
+        //     buy = prices[i];
+        //     sell = prices[i];
+        // }
+        // return max;
+
+        //method 2: dp
+        //初始化一个二维dp数组，记录当前时间点买入卖出股票的最大利润
+        int[][] dp = new int[prices.length][2];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]+prices[i]);
+            dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0]-prices[i]);
         }
-        return max;
+        return dp[prices.length-1][0];
+
     }
 }
 // @lc code=end
