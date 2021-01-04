@@ -16,7 +16,7 @@ class Solution {
         return helper(memo, N);
         /**
          * dp[1] = dp[2] = 1
-         * dp[i] = dp[i-1] + dp[i-2]
+         * i >= 3: dp[i] = dp[i-1] + dp[i-2]
          */
     }
 
