@@ -21,6 +21,7 @@ class Solution {
     public void backtrack(List<List<Integer>> res, int[] nums, ArrayList<Integer> temp, int[] visited){
         //当长度达到指定长度后，添加数组，并停止递归
         if(temp.size() == nums.length){
+            //在此需要复制temp数组，否则若直接添加数组temp，在后续递归遍历操作后，会引起其内部的值变化
             res.add(new ArrayList<>(temp));
             return;
         }

@@ -24,7 +24,7 @@ class Solution {
         solve(ret, "", root);
         return ret;
     }
-    //利用深度遍历方法，递归得到每一条路径
+    //利用深度优先遍历方法，递归得到每一条路径，前序遍历
     private void solve(List<String> ret, String cur, TreeNode root){
         if(root == null) return;
         cur += root.val;

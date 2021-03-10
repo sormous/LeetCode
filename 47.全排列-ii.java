@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -17,9 +18,39 @@ import java.util.List;
 class Solution {
     List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> permuteUnique(int[] nums) {
-        dfs(nums, 0);
+        //方法1
+        // dfs(nums, 0);
+        // return res;
+
+        //方法2
+        List<Integer> temp = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+        Arrays.sort(nums);
+        backtrack(temp, res, nums, visited);
         return res;
     }
+
+    private void backtrack(List<Integer> temp, List<List<Integer>> res, int[] nums, boolean[] visited){
+        if(temp.size() == nums.length){
+            res.add(new ArrayList<Integer>(temp));
+            return ;
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            //在数组排序之后，添加该元素前，先判断元素是否等于前一个元素，若等于且前一个元素还未访问，则直接跳过该元素
+            if(i > 0 && nums[i] == nums[i-1] && !visited[i-1]){
+                continue;   //避免重复的方法
+            }
+            if(visited[i]) continue;
+            temp.add(nums[i]);
+            visited[i] = true;
+            backtrack(temp, res, nums, visited);
+            visited[i] = false;
+            temp.remove(temp.size()-1);
+
+        }
+    }
+
 
     private void dfs(int[] nums, int cur){
         //当cur==length，则添加进结果数组
