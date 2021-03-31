@@ -14,6 +14,18 @@
  */
 class Solution {
     public int maxProfit(int[] prices, int fee) {
+        int n = prices.length;
+        int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            //需要记录前一天未持有的状态，用来更新当天的买入状态
+            int temp = dp_i_0;
+            //相当于买入股票的价格升高了。
+            //在第一个式子里减也是一样的，相当于卖出股票的价格减小了。
+            dp_i_0 = Math.max(dp_i_0, dp_i_1+prices[i]);
+            dp_i_1 = Math.max(dp_i_1, temp-prices[i]-fee);
+        }
+        return dp_i_0;
+        
         //method 1: dp
         // int[][] dp = new int[prices.length][2];
         // dp[0][0] = 0; 
@@ -27,21 +39,21 @@ class Solution {
 
         //method 2: greedy
         //我们将手续费放在买入时进行计算
-        int buy = prices[0]+fee;
-        int res = 0;
-        for (int i = 1; i < prices.length; i++) {
-            //如果当前prices[i]+fee小于buy购买价格，那么我们不如用该价格进行购入
-            if(prices[i] + fee < buy){
-                buy = prices[i] + fee;
-            }
-            //如果当前prices[i] 大于buy购买价格，那么就可以以当前价格进行卖出
-            //并且将buy设置当前价格，以防后续股票还有增长的情况，可以继续卖出
-            else if(prices[i] > buy){
-                res += prices[i] - buy;
-                buy = prices[i];
-            }
-        }
-        return res;
+        // int buy = prices[0]+fee;
+        // int res = 0;
+        // for (int i = 1; i < prices.length; i++) {
+        //     //如果当前prices[i]+fee小于buy购买价格，那么我们不如用该价格进行购入
+        //     if(prices[i] + fee < buy){
+        //         buy = prices[i] + fee;
+        //     }
+        //     //如果当前prices[i] 大于buy购买价格，那么就可以以当前价格进行卖出
+        //     //并且将buy设置当前价格，以防后续股票还有增长的情况，可以继续卖出
+        //     else if(prices[i] > buy){
+        //         res += prices[i] - buy;
+        //         buy = prices[i];
+        //     }
+        // }
+        // return res;
 
     }
 }

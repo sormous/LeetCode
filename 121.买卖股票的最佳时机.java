@@ -14,17 +14,32 @@ class Solution {
      * @return
      */
     public int maxProfit(int[] prices) {
-        if(prices.length <= 1){
-            return 0;
+        //0表示当前没有持有股票，1表示当前持有股票
+        //逐步遍历，进行更新
+        int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
+        for (int price : prices) {
+            //下一步的没有持有股票状态，要么是保持上一未持有状态，要么上一持有状态在当前卖出
+            // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+            dp_i_0 = Math.max(dp_i_0, dp_i_1+price);
+            //下一步持有股票状态，要么保持上一持有状态，要么买入当前股票
+            // dp[i][1] = max(dp[i-1][1], -prices[i])
+            dp_i_1 = Math.max(dp_i_1, -price);
         }
+        return dp_i_0;
 
-        int min=prices[0], max=0;
-        for(int price:prices){
-            max = Math.max(max, price-min);
-            min = Math.min(min, price);
-        }
 
-        return max;
+        //通过遍历，找出差值最大的情况
+        // if(prices.length <= 1){
+        //     return 0;
+        // }
+
+        // int min=prices[0], max=0;
+        // for(int price:prices){
+        //     max = Math.max(max, price-min);
+        //     min = Math.min(min, price);
+        // }
+
+        // return max;
 
         // int[] temp = new int[prices.length];
         //int result = 0;

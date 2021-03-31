@@ -13,27 +13,34 @@ class Solution {
         int l=0, r=nums.length-1;
         int[] res = {-1, -1};
         if(nums.length == 0) return res;
-        //找左边界，由右侧逼近
-        while(l<r){
-            int mid = l+(r-l)/2;
-            //选择逼近方式，>=表示从右侧逼近
-            if(nums[mid] >= target){
-                r=mid;
+        //首先寻找左边界
+        while(l <= r){
+            int mid = l + (r-l)/2;
+            if(nums[mid] < target){
+                l = mid+1;
+            }else if(nums[mid] > target){
+                r = mid-1;
+            }else if(nums[mid] == target){
+                r = mid-1;
             }
-            else l=mid+1;
         }
-        //若找到最后没有等于target值的元素，则直接返回初始数组
-        if(nums[l] != target)  return res;
+        //如果不存在目标值，则直接返回初始值
+        if(l >= nums.length || nums[l] != target) return res;
         res[0] = l;
-        r=nums.length;
-        //找右边界，由左侧逼近
-        while(l<r){
-            int mid = l+(r-l)/2;
-            //<=表示从左侧逼近
-            if(nums[mid] <= target) l=mid+1;
-            else r=mid;
+        
+        //再寻找右边界
+        r = nums.length-1;
+        while(l <= r){
+            int mid = l + (r-l)/2;
+            if(nums[mid] < target){
+                l = mid+1;
+            }else if(nums[mid] > target){
+                r = mid-1;
+            }else{
+                l = mid+1;
+            }
         }
-        res[1] = l-1;
+        res[1] = r;
 
         return res;
     }
