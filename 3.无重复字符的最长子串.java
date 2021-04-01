@@ -9,27 +9,25 @@ import java.util.Map;
 
 // @lc code=start
 class Solution {
+    Map<Character, Integer> window = new HashMap<>();
+
     public int lengthOfLongestSubstring(String s) {
-        if(s == null){
-            return 0;
-        }
-        int start = 0;
-        int result = 0;
-        // 哈希表记录字符串中每一个字符和它的位置
-        Map<Character, Integer> map = new HashMap<>(s.length());
-        
-        //遍历字符串，遇到与子串中字符重复的字符则将子串起始位置+1
-        for (int i=0; i<s.length(); i++){
-            char ch = s.charAt(i);
-            if(map.containsKey(ch) && map.get(ch) >= start){
-                start = map.get(ch) + 1;
+        int l=0, r=0;
+        int res = 0;
+        while(r < s.length()){
+            char c = s.charAt(r);
+            r++;
+            window.put(c, window.getOrDefault(c, 0)+1);
+
+            //当前window中有重复值了，那么就收缩窗口，知道没有重复值
+            while(window.get(c) > 1){
+                char d = s.charAt(l);
+                l++;
+                window.put(d, window.getOrDefault(d, 0)-1);
             }
-            else{
-                result = Math.max(result, i-start+1);
-            }
-            map.put(ch, i);
+            res = Math.max(res, r-l);
         }
-        return result;
+        return res;
     }
 }
 // @lc code=end
