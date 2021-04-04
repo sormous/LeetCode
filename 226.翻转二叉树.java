@@ -20,11 +20,20 @@
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root == null) return null;
-        //保存右子树
-        TreeNode rTree = root.right;
-        //交换左右子树的位置
-        root.right = invertTree(root.left);
-        root.left = invertTree(rTree);
+
+        //利用前序遍历的思想，在递归之前进行树节点的交换
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        invertTree(root.left);
+        invertTree(root.right);
+
+        // //保存右子树
+        // TreeNode rTree = root.right;
+        // //交换左右子树的位置
+        // root.right = invertTree(root.left);
+        // root.left = invertTree(rTree);
         return root;
     }
 }
