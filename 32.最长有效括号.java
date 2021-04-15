@@ -35,23 +35,6 @@ class Solution {
         }
         return res;
 
-
-        // Deque<Character> stack = new LinkedList<>();
-        // int res = 0, temp = 0;
-        // for (int i = 0; i < s.length(); i++) {
-        //     char c = s.charAt(i);
-        //     if(c == '('){
-        //         stack.push(c);
-        //     }else{
-        //         if(stack.isEmpty()){
-        //             temp = 0;
-        //         }
-        //         temp += 2;
-        //         res = Math.max(res, temp);
-        //     }
-        // }
-        // return res;
-
     }
 }
 // @lc code=end
