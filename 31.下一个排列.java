@@ -25,7 +25,7 @@ class Solution {
                 nums[i] = nums[swap];
                 nums[swap] = temp;
                 Arrays.sort(nums, i+1, len);
-                //交换后，你下标i后面的数组，需要进行升序排序，才能保证是数最小
+                //交换后，下标i后面的数组，需要进行升序排序，才能保证是数最小
                 return;
             }
         }

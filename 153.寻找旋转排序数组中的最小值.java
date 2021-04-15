@@ -11,17 +11,17 @@
 class Solution {
     public int findMin(int[] nums) {
         int l = 0, r = nums.length-1;
-        while(l < r){
+        while(l <= r){
             int mid = l + (r-l)/2;
-            //若中间数小于最右边的数，则说明后半部分递增有序
-            //那么则从前半部分找到最小值
+            //若中间数小于最右边的数，则说明右半部分递增有序，最小值在左半部分，收缩右边界
+            //否则在右半部分，收缩左边，从右半部分找到最小值
             if(nums[mid] < nums[r]){
                 r = mid;
             }else{
                 l = mid+1;
             }
         }
-        return nums[l];
+        return nums[r];
     }
 }
 // @lc code=end
