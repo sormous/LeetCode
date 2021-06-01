@@ -11,11 +11,12 @@
  */
 class Solution {
     public boolean isPowerOfFour(int num) {
-        while(num > 1 && num%4 == 0){
-            num /= 4;
-        }
-        if(num == 1) return true;
-        else return false;
+        return num > 0 && (num&(num-1)) == 0 && (num&(0xaaaaaaaa)) == 0;
+        // while(num > 1 && num%4 == 0){
+        //     num /= 4;
+        // }
+        // if(num == 1) return true;
+        // else return false;
     }
 }
 // @lc code=end
