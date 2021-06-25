@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
+    //完全背包解决方案
     public int numSquares(int n) {
         //申明一个dp数组来记录当前数字最少需要的完全平方数
         int[] dp = new int[n+1];
@@ -32,6 +33,11 @@ class Solution {
         }
         return dp[n];
     }
+
+    //贪心方法, 可以首先判断是否是1个数的平方数，接着是否是2个...
+    // nums = set([i*i for i in range(1, sqrt(n)+1)])
+    //(n, count)， count从1开始遍历，判断当前是否为平方数
+    
 }
 // @lc code=end
 
