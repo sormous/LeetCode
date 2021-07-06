@@ -7,11 +7,12 @@
 // @lc code=start
 class Solution {
     public int change(int amount, int[] coins) {
+        //申明一个dp数组，用来记录等凑成i金额的方式
         int[] dp = new int[amount+1];
         dp[0] = 1;
 
         //外层遍历coin，才是构成组合数的关键，如果内层遍历，那么则构成排列数
-        for (int coin : coins) {
+        for (int coin : coins) { 
             for (int i = coin; i < dp.length; i++) {
                 dp[i] += dp[i-coin];
             }

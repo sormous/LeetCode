@@ -11,8 +11,10 @@ class Solution {
         for (int num : nums) {
             sum += num;
         }
+        //如果全部和小于S，则必不可能满足
+        //且因为num都为正整数，所以必须得被2整除
         if(sum < S || (sum+S) % 2 != 0) return 0;
-
+        
         int target = (sum + S)/2;
         int[] dp = new int[target+1];
         dp[0] = 1;
